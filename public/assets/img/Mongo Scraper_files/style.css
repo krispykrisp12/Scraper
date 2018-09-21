@@ -1,0 +1,49 @@
+body {
+    background-image: url("https://freebeacon.com/wp-content/uploads/2018/08/newspaper.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+
+    font-family: 'Oranienbaum', serif;
+}
+
+.navbar-style {
+    padding: 20px;
+    background: rgb(43, 75, 214, .8);
+    border-bottom: solid 3px red;
+    border-top: solid 3px red;
+
+}
+button {
+    background: red;
+    color: #fff;
+    padding: 10px 10px;
+    margin: 10px 10px;
+    font-size: 20px;
+}
+ul li {
+    padding: 10px 20px;
+    font-size: 20px;
+}
+
+a {
+   color: #fff;
+
+}
+
+.logo {
+    font-size: 40px;
+    color: #fff;
+}
+#header-title{
+    text-align: center;
+    font-size: 120%;
+    background: rgb(43, 75, 214, .7);
+    color: #fff;
+    display: none;
+}
+
+.main {
+    margin-top: 30px;
+    text-align: center;
+    background: rgb(255, 255, 255, .7);
+}
