@@ -12,7 +12,7 @@ let exphbs = require("express-handlebars");
 
 // ============================================
 let path = require("path");
-let PORT = process.env.PORT || 3000;
+let PORT = process.env.PORT || 3001;
 let db = require("./models");
 
 let app = express();
@@ -62,34 +62,44 @@ app.get("/scrape", function(req, res) {
     let $ = cheerio.load(response.data);
 
     // Now, we grab every h2 within an article tag, and do the following:
-    $("article h2").each(function(i, element) {
+    $("article.story.theme-summary div.story-body").each(function(i, element) {
       // Save an empty result object
       let result = {};
-    
-      // Add the text and href of every link, and save them as properties of the result object
-      result.headline = $(this)
-        .find("h2.headline").text() || "Not found";
 
-      result.link = $(this)
-        .find("a").attr("href")  || "Not found";
-      result.summary = $(this)
-        .children("p.summary").text()  || "Not found";
-      result.author = $(this)
-        .children("p.byline").text()  || "Not found";
+      // Add the text and href of every link, and save them as properties of the result object
+      let headline = $(this).find("h2.headline").text().trim() || "Not Found!";
+      let link = $(this).find("a").attr("href").trim() || "Not Found!";
+      let summary = $(this).find("p.summary").text().trim() || "Not Found!";
+      let author = $(this).find("p.byline").text().trim() || "Not Found!";
+
+      result.link = link;
+      
+      if (headline  && summary && author) {
+
+        result.headline = headline;
+        result.summary = summary;
+        result.author = author;
+      
       // --------------------------------------------------
       // console.log(results);
       // --------------------------------------------------
 
       // Create a new Article using the `result` object built from scraping
       db.Article.create(result)
-        .then(function(dbArticle) {
+        .then(function(articles) {
           // View the added result in the console
-          console.log(dbArticle);
+          console.log(articles);
+          // res.send("Scrape Complete");
         })
         .catch(function(err) {
           // If an error occurred, send it to the client
           return res.json(err);
-        });
+        })
+        
+      } //end of the if statment
+      else {
+        console.log("Not everything is being returned");
+      };
     });
 
     // If we were able to successfully scrape and save an Article, send a message to the client
