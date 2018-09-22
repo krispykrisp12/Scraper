@@ -158,9 +158,14 @@ app.post("/articles/:id", function(req, res) {
       res.json(err);
     });
 });
-
-
-
+// =====================================================
+app.delete("/delete", function(req, res) {
+  db.Article.deleteMany({}, function(err){
+    if (err) {
+      console.log(err);
+    }
+  });
+})
 
 // Start the server
 app.listen(PORT, function() {
