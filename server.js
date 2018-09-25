@@ -72,10 +72,10 @@ app.get("/scrape", function(req, res) {
       let summary = $(this).find("p.summary").text().trim() || "Not Found!";
       let author = $(this).find("p.byline").text().trim() || "Not Found!";
 
-      result.link = link;
-      
-      if (headline  && summary && author) {
 
+      
+      if (headline  && summary && author && link) {
+        result.link = link;
         result.headline = headline;
         result.summary = summary;
         result.author = author;

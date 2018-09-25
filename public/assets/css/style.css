@@ -42,8 +42,12 @@ a {
     display: none;
 }
 
-#main {
-    /* margin-top: 30px;
-    text-align: center; */
+.main-box {
     background: rgb(255, 255, 255, .7);
+    margin-top: 10px;
+    text-align: center;
+    margin: 10px;
+}
+.header-box {
+    background: red;
 }
